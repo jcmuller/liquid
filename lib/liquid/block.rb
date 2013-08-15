@@ -129,7 +129,12 @@ module Liquid
         end
       end
 
-      output.join
+      begin
+        output.join
+      rescue Encoding::CompatibilityError
+        output.map{ |l| l.force_encoding("UTF-8") }
+        output.join
+      end
     end
   end
 end
