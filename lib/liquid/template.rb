@@ -41,7 +41,9 @@ module Liquid
       end
 
       # creates a new <tt>Template</tt> object from liquid source code
-      def parse(source)
+      def parse(source, options = {:locale => "lib/liquid/locales/en.yml"})
+        I18n.global = I18n.new(options[:locale])
+
         template = Template.new
         template.parse(source)
         template
@@ -101,7 +103,7 @@ module Liquid
       when nil
         Context.new(assigns, instance_assigns, registers, @rethrow_errors, @resource_limits)
       else
-        raise ArgumentError, "Expect Hash or Liquid::Context as parameter"
+        raise ArgumentError, I18n.translate("errors.template.argument_hash_or_context")
       end
 
       case args.last

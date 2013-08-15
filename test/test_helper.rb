@@ -7,7 +7,9 @@ begin
 rescue LoadError
   puts "Couldn't load ruby-debug. gem install ruby-debug if you need it."
 end
-require File.join(File.dirname(__FILE__), '..', 'lib', 'liquid')
+
+$:.unshift(File.join(File.expand_path(File.dirname(__FILE__)), '..', 'lib'))
+require 'liquid.rb'
 
 
 module Test
