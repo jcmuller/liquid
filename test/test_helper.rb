@@ -14,6 +14,12 @@ require 'liquid.rb'
 
 module Test
   module Unit
+    class TestCase
+      def fixture(name)
+        File.join(File.expand_path(File.dirname(__FILE__)), "fixtures", name)
+      end
+    end
+
     module Assertions
       include Liquid
 
